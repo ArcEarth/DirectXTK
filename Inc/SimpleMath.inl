@@ -18,7 +18,7 @@
 * Rectangle
 *
 ****************************************************************************/
-
+#if !defined(_SIMPLE_MATH_NO_VIEWPORT) || !_SIMPLE_MATH_NO_VIEWPORT
 //------------------------------------------------------------------------------
 // Rectangle operations
 //------------------------------------------------------------------------------
@@ -142,7 +142,7 @@ inline RECT Rectangle::Union(const RECT& rcta, const RECT& rctb)
     result.bottom = rcta.bottom > rctb.bottom ? rcta.bottom : rctb.bottom;
     return result;
 }
-
+#endif
 
 /****************************************************************************
  *
@@ -3588,6 +3588,8 @@ inline bool Ray::Intersects( const Plane& plane, _Out_ float& Dist ) const
 }
 
 
+#if !defined(_SIMPLE_MATH_NO_VIEWPORT) || !_SIMPLE_MATH_NO_VIEWPORT
+
 /****************************************************************************
  *
  * Viewport
@@ -3692,3 +3694,5 @@ inline void Viewport::Unproject(const Vector3& p, const Matrix& proj, const Matr
     v = XMVector3Unproject(v, x, y, width, height, minDepth, maxDepth, projection, view, world);
     XMStoreFloat3(&result, v);
 }
+
+#endif

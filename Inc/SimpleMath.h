@@ -13,10 +13,12 @@
 
 #pragma once
 
+#if !defined(_SIMPLE_MATH_NO_VIEWPORT) || !_SIMPLE_MATH_NO_VIEWPORT
 #if defined(_XBOX_ONE) && defined(_TITLE)
 #include <d3d11_x.h>
 #else
 #include <d3d11_1.h>
+#endif
 #endif
 
 #include <functional>
@@ -42,6 +44,7 @@ struct Matrix;
 struct Quaternion;
 struct Plane;
 
+#if !defined(_SIMPLE_MATH_NO_VIEWPORT) || !_SIMPLE_MATH_NO_VIEWPORT
 //------------------------------------------------------------------------------
 // 2D rectangle
 struct Rectangle
@@ -100,6 +103,7 @@ struct Rectangle
     static Rectangle Union(const Rectangle& ra, const Rectangle& rb);
     static RECT Union(const RECT& rcta, const RECT& rctb);
 };
+#endif
 
 //------------------------------------------------------------------------------
 // 2D vector
@@ -804,6 +808,7 @@ public:
     bool Intersects( const Plane& plane, _Out_ float& Dist ) const;
 };
 
+#if !defined(_SIMPLE_MATH_NO_VIEWPORT) || !_SIMPLE_MATH_NO_VIEWPORT
 //------------------------------------------------------------------------------
 // Viewport
 class Viewport
@@ -856,6 +861,7 @@ public:
     static RECT __cdecl ComputeDisplayArea(DXGI_SCALING scaling, UINT backBufferWidth, UINT backBufferHeight, int outputWidth, int outputHeight);
     static RECT __cdecl ComputeTitleSafeArea(UINT backBufferWidth, UINT backBufferHeight);
 };
+#endif
 
 #include "SimpleMath.inl"
 
@@ -868,6 +874,7 @@ public:
 namespace std
 {
 
+#if !defined(_SIMPLE_MATH_NO_VIEWPORT) || !_SIMPLE_MATH_NO_VIEWPORT
     template<> struct less<DirectX::SimpleMath::Rectangle>
     {
         bool operator()(const DirectX::SimpleMath::Rectangle& r1, const DirectX::SimpleMath::Rectangle& r2) const
@@ -878,6 +885,7 @@ namespace std
                 || ((r1.x == r2.x) && (r1.y == r2.y) && (r1.width == r2.width) && (r1.height < r2.height)));
         }
     };
+#endif
 
     template<> struct less<DirectX::SimpleMath::Vector2>
     {
@@ -982,6 +990,7 @@ namespace std
         }
     };
 
+#if !defined(_SIMPLE_MATH_NO_VIEWPORT) || !_SIMPLE_MATH_NO_VIEWPORT
     template<> struct less<DirectX::SimpleMath::Viewport>
     {
         bool operator()(const DirectX::SimpleMath::Viewport& vp1, const DirectX::SimpleMath::Viewport& vp2) const
@@ -998,5 +1007,6 @@ namespace std
             return false;
         }
     };
+#endif
 
 } // namespace std
