@@ -190,6 +190,9 @@ namespace DirectX
 
             deviceContext->VSSetShader(vertexShader, nullptr, 0);
             deviceContext->PSSetShader(pixelShader, nullptr, 0);
+			deviceContext->HSSetShader(nullptr, nullptr, 0);
+			deviceContext->DSSetShader(nullptr, nullptr, 0);
+			deviceContext->GSSetShader(nullptr, nullptr, 0);
 
 #if defined(_XBOX_ONE) && defined(_TITLE)
             void *grfxMemory;
